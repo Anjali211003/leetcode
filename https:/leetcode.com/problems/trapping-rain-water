@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+         int n=height.size();
+        vector <int> mxl(n);
+        vector <int> mxr(n);
+        int sum=0,mxli=0,mxri=0;
+        
+        int s=0,e=n-1;
+         while(s<n && e>=0){
+            mxli=max(mxli,height[s]);
+            mxri=max(mxri,height[e]);
+            mxl[s]=mxli;
+            mxr[e]=mxri;
+            s++;
+            e--;
+        }
+        vector<int>water(n);
+        for(int i=0;i<n;i++)
+        {
+            water[i]=min(mxl[i],mxr[i])-height[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            sum+=water[i];
+        }
+        return sum;
+    }
+};
