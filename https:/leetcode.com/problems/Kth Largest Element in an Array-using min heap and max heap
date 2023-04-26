@@ -30,3 +30,23 @@ public:
         return ans;
     }
 };
+
+/* another approach using min heap*/
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int,vector<int>,greater<int>> minh(nums.begin(), nums.begin() + k);
+        if (nums.size() < k) {
+        exit(-1);
+    }
+       for(int i=k;i<nums.size();i++)
+       {
+           if(minh.top()<nums[i])
+               {minh.pop();
+                minh.push(nums[i]);
+                }
+           }
+       
+       return minh.top();
+    }
+};
