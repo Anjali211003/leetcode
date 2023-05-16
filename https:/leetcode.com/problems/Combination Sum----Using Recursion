@@ -1,0 +1,33 @@
+class Solution {
+public:
+vector<vector<int>>ans;
+   void findcombination(int i,int target,vector<int>& arr,int currsum,vector<int>& temp){
+       
+      if(currsum>target)
+      {
+          return;
+      }
+      if(i==arr.size())
+      {
+          if(currsum==target)
+          {
+              ans.push_back(temp);
+          }
+          return;
+      }
+      currsum+=arr[i];
+      temp.push_back(arr[i]);
+      findcombination(i,target,arr,currsum,temp);
+      currsum-=arr[i];
+      temp.pop_back();
+      findcombination(i+1,target,arr,currsum,temp);
+   } 
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> temp;
+    
+        findcombination(0,target,candidates,0,temp);
+        return ans;
+    }
+
+    
+};
