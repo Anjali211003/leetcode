@@ -1,0 +1,20 @@
+class Solution {
+private:
+    void solve(int i,vector<int>& v,vector<int>& nums,vector<vector<int>>& op){
+        if(i>=nums.size())
+        {op.push_back(v);
+        return;}
+        v.push_back(nums[i]);
+        solve(i+1,v,nums,op);
+        v.pop_back();
+           solve(i+1,v,nums,op);
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int>v;
+        vector<vector<int>>op;
+       solve(0,v,nums,op);
+       return op;
+    
+    }
+};
