@@ -1,0 +1,84 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+private:
+    int count(ListNode* head)
+    {
+        ListNode* ptr=head;
+        int count=0;
+        while(ptr!=NULL)
+        {
+          count++;
+         ptr=ptr->next;
+      
+        }
+      return count;
+    }
+public:
+   
+    ListNode* deleteMiddle(ListNode* head) {
+       
+         if(head==NULL || head->next==NULL)
+        { 
+            head=NULL;
+           return head;
+        }
+        int n=count(head);
+        if(n==2)
+        {
+            head->next=NULL;
+            return head;
+        }
+        ListNode *ptr=head;
+        ListNode *temp=head;
+        int mid=n/2;
+      
+        for (int i = 0; i < mid; i++)
+        {  temp=ptr;
+            ptr = ptr -> next;
+        }
+        
+        temp -> next = ptr -> next;
+        delete(ptr);
+        return head;
+}
+       
+    
+   /* another approach using slow and fast pointer */
+   /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+   
+    ListNode* deleteMiddle(ListNode* head) {
+       if(head==NULL || head->next==NULL)
+       return NULL;
+       ListNode *slow=head;
+       ListNode *fast=head;
+       ListNode *ptr=NULL;
+    while(fast!=NULL && fast->next!=NULL)
+    {    ptr=slow;
+         slow=slow->next;
+         fast=fast->next->next;
+
+    }
+      ptr->next=slow->next;
+    return head;
+      
+    }
