@@ -1,0 +1,35 @@
+/* using 2 loops */
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        vector<int>prefixsum(gain.size()+1);
+        int altitude=0;
+        prefixsum[0]=0;
+        for(int i=1;i<=gain.size();i++)
+        {
+        prefixsum[i]=prefixsum[i-1]+gain[i-1];
+        }
+        for(int j=0;j<prefixsum.size();j++)
+        {     
+            altitude=max(prefixsum[j],altitude);
+        }
+          return altitude;
+    }
+};
+
+
+/* max function */
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        vector<int>prefixsum(gain.size()+1);
+        int altitude=0;
+        prefixsum[0]=0;
+        for(int i=1;i<=gain.size();i++)
+        {
+        prefixsum[i]=prefixsum[i-1]+gain[i-1];
+        }
+        altitude=*max_element(prefixsum.begin(),prefixsum.end());
+          return altitude;
+    }
+};
