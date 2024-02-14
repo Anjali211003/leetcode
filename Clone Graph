@@ -1,0 +1,15 @@
+from typing import Optional
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        dict={}
+        def dfs(node):
+            if node in dict:
+                return dict[node]
+            copy=Node(node.val)
+            dict[node]=copy
+            for adj in node.neighbors:
+                copy.neighbors.append(dfs(adj))
+            return copy
+        return dfs(node) if node else None
+
+        
