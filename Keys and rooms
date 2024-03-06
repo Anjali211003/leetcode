@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+       vector<bool>visited(rooms.size(),false);
+        stack<int>st;
+        st.push(0);
+        int res;
+       
+     while(!st.empty()){
+         res=st.top();
+         st.pop();
+         visited[res]=true;
+         for(auto k:rooms[res]){
+            if(visited[k]!=true)
+            {
+              st.push(k);
+            }
+         }
+     }
+       for(int i = 0 ; i < rooms.size(); i++)
+        {
+            if(visited[i] == false)
+                return false;
+        }
+        return true;
+    }
+};
