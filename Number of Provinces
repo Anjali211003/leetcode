@@ -1,0 +1,26 @@
+class Solution {
+public:
+ int res,count = 0,n,visited[201]={0};
+  void solve(vector<vector<int>>& isConnected,int start){
+    
+        visited[start] = true;
+        count++;
+        for(int i= 0;i<n;i++)
+        {
+            if(!visited[i] and isConnected[start][i]) 
+            solve(isConnected,i);
+        }
+    }
+  
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        n=isConnected.size();
+         for(int i = 0;i<n;i++) 
+        { if(!visited[i]) 
+         {count=0;
+         solve(isConnected,i);
+         res++;
+         }
+         }
+         return res;
+    }
+};
